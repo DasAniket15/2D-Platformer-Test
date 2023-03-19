@@ -6,9 +6,9 @@ public class PlayerController : MonoBehaviour
 {
     private float horizontal;
     private float speed = 8f;
-    private float jumpPower = 16f;
     private bool isFacingRight = true;
 
+    [SerializeField] private float jumpPower = 8f;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
-        }
+        } 
 
         /*
         if (Input.GetKeyDown(KeyCode.Space) && Input.GetKey(KeyCode.D))
