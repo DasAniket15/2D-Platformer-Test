@@ -5,10 +5,10 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private float horizontal;
-    private float speed = 8f;
+    [SerializeField] private float speed;
     private bool isFacingRight = true;
 
-    [SerializeField] private float jumpPower = 8f;
+    [SerializeField] private float jumpPower;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
 
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
@@ -26,7 +25,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
         {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);
         } 
 
         /*
