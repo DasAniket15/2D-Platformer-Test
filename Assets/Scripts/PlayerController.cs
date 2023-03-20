@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private bool doubleJump;
 
     [SerializeField] private float jumpPower;
+    [SerializeField] private float doubleJumpPower;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
@@ -29,7 +30,7 @@ public class PlayerController : MonoBehaviour
         {
             if (IsGrounded() || doubleJump)
             {
-                rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+                rb.velocity = new Vector2(rb.velocity.x, doubleJump ? doubleJumpPower : jumpPower);
 
                 doubleJump = !doubleJump;
             }
