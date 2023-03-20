@@ -24,41 +24,22 @@ public class PlayerController : MonoBehaviour
         if (IsGrounded() && !Input.GetButton("Jump"))
         {
             doubleJump = false;
-            
-
         }
 
         if (Input.GetButtonDown("Jump"))
         {
-            if (rb.velocity.y > 0f)
+            if (IsGrounded() || doubleJump)
             {
-                if (IsGrounded() || doubleJump)
-                {
-                    rb.velocity = new Vector2(rb.velocity.x, doubleJump ? doubleJumpPower : jumpPower);
+                rb.velocity = new Vector2(rb.velocity.x, doubleJump ? doubleJumpPower : jumpPower);
 
-                    doubleJump = !doubleJump;
-
-                }
-            }
-            else
-            {
                 doubleJump = !doubleJump;
-                
-                rb.velocity = new Vector2(rb.velocity.x, jumpPower);
             }
         }
 
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);
-        } 
-
-        /*
-        if (Input.GetKeyDown(KeyCode.Space) && Input.GetKey(KeyCode.D))
-        {
-            rb.velocity = new Vector2(50f, rb.velocity.y);
         }
-        */
 
         Flip();
     }
@@ -67,7 +48,6 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
-       
     }
 
 
