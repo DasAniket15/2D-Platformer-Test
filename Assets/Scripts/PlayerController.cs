@@ -14,6 +14,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashingTime;
     [SerializeField] private float dashingCooldown;
 
+    [SerializeField] private float coyoteTime;
+    private float coyoteTimeCounter;
+
+    [SerializeField] private float jumpBufferTime;
+    private float jumpBufferCounter;
+
     private bool isFacingRight = true;
     private bool doubleJump;
 
@@ -28,6 +34,28 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        // Coyote time
+        if (IsGrounded())
+        {
+            coyoteTimeCounter = coyoteTime;
+        }
+
+        else
+        {
+            coyoteTimeCounter -= Time.deltaTime;
+        }
+
+        // Jump buffer
+        if (Input.GetButtonDown("Jump"))
+        {
+            jumpBufferCounter = jumpBufferTime;
+        }
+
+        else
+        {
+            jumpBufferCounter -= Time.deltaTime;
+        }
+
         if (isDashing)
         {
             return;
@@ -40,12 +68,13 @@ public class PlayerController : MonoBehaviour
             doubleJump = false;
         }
 
-        if (Input.GetButtonDown("Jump"))
+        if (jumpBufferCounter > 0f)
         {
-            if (IsGrounded() || doubleJump)
+            if (coyoteTimeCounter > 0f || doubleJump)
             {
                 rb.velocity = new Vector2(rb.velocity.x, doubleJump ? doubleJumpPower : jumpPower);
 
+                jumpBufferCounter = 0f;
                 doubleJump = !doubleJump;
             }
         }
@@ -53,8 +82,9 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);
-        }
 
+            coyoteTimeCounter = 0f;
+        }
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
         {
