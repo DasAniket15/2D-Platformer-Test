@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpBufferTime;
     private float jumpBufferCounter;
 
-    private bool isFacingRight = true;
+    public bool isFacingRight = true;
     private bool doubleJump;
 
     private bool canDash = true;
