@@ -7,9 +7,12 @@ public class PlayerController : MonoBehaviour
     private float horizontal;
     [SerializeField] private float speed;
     
+
+
     [SerializeField] private float jumpPower;
     [SerializeField] private float doubleJumpPower;
-    
+    [SerializeField] private float maxFallSpeed;
+
     [SerializeField] private float dashingPower;
     [SerializeField] private float dashingTime;
     [SerializeField] private float dashingCooldown;
@@ -104,6 +107,14 @@ public class PlayerController : MonoBehaviour
         }
 
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+
+        if (rb.velocity.y < maxFallSpeed)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, maxFallSpeed );
+        }
+        
+
+
     }
 
 

@@ -1920,11 +1920,12 @@ MonoBehaviour:
   speed: 5
   jumpPower: 8
   doubleJumpPower: 7
+  maxFallSpeed: -13
   dashingPower: 200
   dashingTime: 0.2
   dashingCooldown: 1
   coyoteTime: 0.1
-  jumpBufferTime: 0.2
+  jumpBufferTime: 0.1
   rb: {fileID: 1013683902}
   groundCheck: {fileID: 1508286346}
   groundLayer:
