@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashingPower;
     [SerializeField] private float dashingTime;
     [SerializeField] private float dashingCooldown;
+    [SerializeField] private float afterDashCooldown;
+    [SerializeField] private float dashPushPower ;
+
 
     [SerializeField] private float coyoteTime;
     private float coyoteTimeCounter;
@@ -28,6 +31,7 @@ public class PlayerController : MonoBehaviour
 
     private bool canDash = true;
     private bool isDashing;
+    private bool hasDashed;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
@@ -108,6 +112,14 @@ public class PlayerController : MonoBehaviour
 
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
 
+        if (hasDashed == true && isFacingRight && !IsGrounded())
+        {
+            rb.AddForce(new Vector2(dashPushPower, 0));
+        }
+        if (hasDashed == true && !isFacingRight && !IsGrounded())
+        {
+            rb.AddForce(new Vector2(-dashPushPower, 0));
+        }
         if (rb.velocity.y < maxFallSpeed)
         {
             rb.velocity = new Vector2(rb.velocity.x, maxFallSpeed );
@@ -154,8 +166,16 @@ public class PlayerController : MonoBehaviour
         tr.emitting = false;
         rb.gravityScale = originalGravity;
         isDashing = false;
+        hasDashed = true;
+
+        yield return new WaitForSeconds(afterDashCooldown);
+
+        hasDashed = false;
 
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
+        
+       
+        
     }
 }
