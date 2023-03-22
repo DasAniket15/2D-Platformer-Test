@@ -4,34 +4,25 @@ using UnityEngine;
 
 public class Animation : MonoBehaviour
 {
-
     Animator animator;
-    private Rigidbody2D rb;
-    private Transform groundCheck;
     public PlayerController playerController;
 
     private string currentAnimation;
     private float horizontal;
     private float vertical;
     private bool canRun;
-    private bool showDash = true;
-
-
 
     // Animation States
     const string PLAYER_IDLE = "playerIdle";
     const string PLAYER_RUN = "playerRun";
     const string PLAYER_JUMP = "playerJump";
     const string PLAYER_DOUBLE_JUMP = "playerDoubleJump";
-    const string PLAYER_DASH = "playerDash";
 
     void Start()
     {
         animator = GetComponent<Animator>();
-        rb = transform.parent.GetComponent<Rigidbody2D>();
-        groundCheck = transform.parent.GetComponent<Transform>();
-
     }
+
 
     // Update is called once per frame
     void Update()
@@ -43,25 +34,24 @@ public class Animation : MonoBehaviour
         {
             canRun = true;
             //ChangeAnimationState(PLAYER_RUN);
-           // Debug.Log("Yes");
+            // Debug.Log("Yes");
         }
+
         if (horizontal == 0 && playerController.isDashing == false)
         {
-            ChangeAnimationState(PLAYER_IDLE);
-            
+            ChangeAnimationState(PLAYER_IDLE);  
         }
+
         if (Input.GetButtonDown("Jump") && playerController.IsGrounded() )
         {
             animator.Play(PLAYER_JUMP);
-
-           // Debug.Log("Yes");
-
+            // Debug.Log("Yes");
         }
+
         if (Input.GetButtonDown("Jump") && !playerController.IsGrounded())
         {
             animator.Play(PLAYER_DOUBLE_JUMP);
-
-           // Debug.Log("Yes");
+            // Debug.Log("Yes");
         }
 
         if (vertical == 0 && playerController.IsGrounded())
@@ -71,6 +61,7 @@ public class Animation : MonoBehaviour
                 animator.Play(PLAYER_RUN);
                 canRun = false;
             }
+
             else
             {
                 animator.Play(PLAYER_IDLE);
@@ -78,28 +69,21 @@ public class Animation : MonoBehaviour
             //Debug.Log("Yes");
 
         }
+
         if(playerController.isDashing == true && !playerController.IsGrounded())
         {
-            ChangeAnimationState(PLAYER_DOUBLE_JUMP);
-            //showDash = false;
-        }
-        
-
-
+            ChangeAnimationState(PLAYER_DOUBLE_JUMP);        }
     }
+
 
     void ChangeAnimationState(string newState)
     {
-       
-
-        // stops interuption between animations
+        // stops interruption between animations
         if (currentAnimation == newState) return;
 
         animator.Play(newState);
-    
 
         // reassign current state
         currentAnimation = newState;
-
     }
 }
