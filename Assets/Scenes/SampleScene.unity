@@ -2057,7 +2057,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  tr: {fileID: 1013683905}
+  tr: {fileID: 2108116176}
 --- !u!96 &1013683905
 TrailRenderer:
   serializedVersion: 2
