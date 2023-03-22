@@ -6,7 +6,6 @@ public class PlayerController : MonoBehaviour
 {
     private float horizontal;
     [SerializeField] private float speed;
-    
 
 
     [SerializeField] private float jumpPower;
@@ -30,14 +29,13 @@ public class PlayerController : MonoBehaviour
     private bool doubleJump;
 
     private bool canDash = true;
-    private bool isDashing;
+    public bool isDashing;
     private bool hasDashed;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private TrailRenderer tr;
-
 
     void Update()
     {
@@ -114,23 +112,27 @@ public class PlayerController : MonoBehaviour
 
         if (hasDashed == true && isFacingRight && !IsGrounded())
         {
-            rb.AddForce(new Vector2(dashPushPower, 0));
+            rb.AddForce(new Vector2(dashPushPower, rb.velocity.y));
         }
         if (hasDashed == true && !isFacingRight && !IsGrounded())
         {
-            rb.AddForce(new Vector2(-dashPushPower, 0));
+            rb.AddForce(new Vector2(-dashPushPower, rb.velocity.y));
         }
         if (rb.velocity.y < maxFallSpeed)
         {
-            rb.velocity = new Vector2(rb.velocity.x, maxFallSpeed );
+            rb.velocity = new Vector2(rb.velocity.x, maxFallSpeed);
         }
-        
+
+        if (rb.velocity.x > 0f)
+        {
+            
+        }
 
 
     }
 
 
-    private bool IsGrounded()
+    public bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
@@ -148,7 +150,6 @@ public class PlayerController : MonoBehaviour
             transform.localScale = localScale;
         }
     }
-
 
     private IEnumerator Dash()
     {
