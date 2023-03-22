@@ -2046,7 +2046,7 @@ MonoBehaviour:
   dashingPower: 200
   dashingTime: 0.2
   dashingCooldown: 1
-  afterDashCooldown: 0.2
+  afterDashCooldown: 0.5
   dashPushPower: 10000
   coyoteTime: 0.1
   jumpBufferTime: 0.1
@@ -2057,7 +2057,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  tr: {fileID: 2108116176}
+  tr: {fileID: 1013683905}
 --- !u!96 &1013683905
 TrailRenderer:
   serializedVersion: 2
