@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour
     private float horizontal;
     [SerializeField] private float speed;
 
-
     [SerializeField] private float jumpPower;
     [SerializeField] private float doubleJumpPower;
     [SerializeField] private float maxFallSpeed;
@@ -17,7 +16,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashingCooldown;
     [SerializeField] private float afterDashCooldown;
     [SerializeField] private float dashPushPower ;
-
 
     [SerializeField] private float coyoteTime;
     private float coyoteTimeCounter;
@@ -40,6 +38,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private TrailRenderer tr;
+
 
     void Update()
     {
@@ -95,6 +94,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+        // Jump and double jump
         horizontal = Input.GetAxis("Horizontal");
 
         if (IsGrounded() && !Input.GetButton("Jump"))
@@ -137,27 +137,24 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+        // Applies momentum to character after dash
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
 
         if (hasDashed == true && isFacingRight && !IsGrounded())
         {
             rb.AddForce(new Vector2(dashPushPower, rb.velocity.y));
         }
+
         if (hasDashed == true && !isFacingRight && !IsGrounded())
         {
             rb.AddForce(new Vector2(-dashPushPower, rb.velocity.y));
         }
+
+        // Clamps fall velocity
         if (rb.velocity.y < maxFallSpeed)
         {
             rb.velocity = new Vector2(rb.velocity.x, maxFallSpeed);
         }
-
-        if (rb.velocity.x > 0f)
-        {
-            
-        }
-
-
     }
 
 
@@ -180,6 +177,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
     private IEnumerator Dash()
     {
         canDash = false;
@@ -189,7 +187,6 @@ public class PlayerController : MonoBehaviour
         rb.gravityScale = 0f;
 
         rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
-
         tr.emitting = true;
 
         yield return new WaitForSeconds(dashingTime);
@@ -199,13 +196,9 @@ public class PlayerController : MonoBehaviour
         hasDashed = true;
 
         yield return new WaitForSeconds(afterDashCooldown);
-
         hasDashed = false;
 
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
-        
-       
-        
     }
 }
