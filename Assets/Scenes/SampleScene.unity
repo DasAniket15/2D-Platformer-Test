@@ -2049,6 +2049,8 @@ MonoBehaviour:
   afterDashCooldown: 0.5
   dashPushPower: 10000
   coyoteTime: 0.1
+  coyoteTimeChecker: 0.1
+  coyoteTimeCheckerBool: 0
   jumpBufferTime: 0.1
   isFacingRight: 1
   isDashing: 0

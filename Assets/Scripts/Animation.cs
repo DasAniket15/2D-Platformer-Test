@@ -57,10 +57,16 @@ public class Animation : MonoBehaviour
            // Debug.Log("Yes");
 
         }
-        if (Input.GetButtonDown("Jump") && !playerController.IsGrounded())
+        if (Input.GetButtonDown("Jump") && !playerController.IsGrounded() )
         {
-            animator.Play(PLAYER_DOUBLE_JUMP);
-
+            if (playerController.coyoteTimeCheckerBool == false)
+            {
+                animator.Play(PLAYER_DOUBLE_JUMP);
+            }
+            else
+            {
+                animator.Play(PLAYER_JUMP);
+            }
            // Debug.Log("Yes");
         }
 
