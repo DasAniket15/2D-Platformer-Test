@@ -20,9 +20,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float coyoteTime;
     private float coyoteTimeCounter;
 
-    [SerializeField] private float coyoteTimeChecker;
-    public bool coyoteTimeCheckerBool;
-    private float coyoteTimeCheckerCounter;
+    
 
 
     [SerializeField] private float jumpBufferTime;
@@ -57,27 +55,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Coyote time checker
-        if (IsGrounded())
-        {
-            coyoteTimeCheckerCounter = coyoteTimeChecker;
-
-
-        }
-
-        else
-        {
-            coyoteTimeCheckerCounter -= Time.deltaTime;
-            Debug.Log(coyoteTimeCheckerCounter);
-        }
-
-        if (coyoteTimeCheckerCounter > 0)
-        {
-            coyoteTimeCheckerBool = true;
-        }
-        else
-        {
-            coyoteTimeCheckerBool = false;
-        }
+      
 
 
         // Jump buffer
