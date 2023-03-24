@@ -20,9 +20,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float coyoteTime;
     private float coyoteTimeCounter;
 
-    [SerializeField] private float coyoteTimeChecker;
-    public bool coyoteTimeCheckerBool;
-    private float coyoteTimeCheckerCounter;
+    
 
     [SerializeField] private float jumpBufferTime;
     private float jumpBufferCounter;
@@ -56,27 +54,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Coyote time checker
-        if (IsGrounded())
-        {
-            coyoteTimeCheckerCounter = coyoteTimeChecker;
-           
-           
-        }
-
-        else
-        {
-            coyoteTimeCheckerCounter -= Time.deltaTime;
-            Debug.Log(coyoteTimeCheckerCounter);
-        }
-
-        if (coyoteTimeCheckerCounter > 0)
-        {
-            coyoteTimeCheckerBool = true;
-        }
-        else 
-        {
-            coyoteTimeCheckerBool = false;
-        }
+       
 
         // Jump buffer
         if (Input.GetButtonDown("Jump"))
@@ -202,3 +180,32 @@ public class PlayerController : MonoBehaviour
         canDash = true;
     }
 }
+
+//code to be used later
+/*
+    [SerializeField] private float coyoteTimeChecker;
+    public bool coyoteTimeCheckerBool;
+    private float coyoteTimeCheckerCounter;
+ 
+     if (IsGrounded())
+        {
+            coyoteTimeCheckerCounter = coyoteTimeChecker;
+           
+           
+        }
+
+        else
+        {
+            coyoteTimeCheckerCounter -= Time.deltaTime;
+            Debug.Log(coyoteTimeCheckerCounter);
+        }
+
+        if (coyoteTimeCheckerCounter > 0)
+        {
+            coyoteTimeCheckerBool = true;
+        }
+        else 
+        {
+            coyoteTimeCheckerBool = false;
+        }
+ */

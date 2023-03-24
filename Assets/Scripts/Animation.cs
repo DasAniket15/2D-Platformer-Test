@@ -59,14 +59,11 @@ public class Animation : MonoBehaviour
         }
         if (Input.GetButtonDown("Jump") && !playerController.IsGrounded() )
         {
-            if (playerController.coyoteTimeCheckerBool == false)
-            {
-                animator.Play(PLAYER_DOUBLE_JUMP);
-            }
-            else
-            {
-                animator.Play(PLAYER_JUMP);
-            }
+            
+            
+            animator.Play(PLAYER_DOUBLE_JUMP);
+            
+          
            // Debug.Log("Yes");
         }
 
@@ -86,7 +83,7 @@ public class Animation : MonoBehaviour
         }
         if(playerController.isDashing == true && !playerController.IsGrounded())
         {
-            ChangeAnimationState(PLAYER_DOUBLE_JUMP);
+            ChangeAnimationState(PLAYER_DASH);
             //showDash = false;
         }
         
@@ -109,3 +106,17 @@ public class Animation : MonoBehaviour
 
     }
 }
+
+
+//code to be used later
+
+/*
+   if (playerController.coyoteTimeCheckerBool == false)
+            {
+                animator.Play(PLAYER_DOUBLE_JUMP);
+            }
+            else
+            {
+                animator.Play(PLAYER_JUMP);
+            }
+ */
