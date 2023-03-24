@@ -58,13 +58,9 @@ public class Animation : MonoBehaviour
 
         }
         if (Input.GetButtonDown("Jump") && !playerController.IsGrounded() )
-        {
-            
-            
-            animator.Play(PLAYER_DOUBLE_JUMP);
-            
-          
-           // Debug.Log("Yes");
+        {         
+                animator.Play(PLAYER_DOUBLE_JUMP);
+             // Debug.Log("Yes");
         }
 
         if (vertical == 0 && playerController.IsGrounded())
@@ -83,7 +79,7 @@ public class Animation : MonoBehaviour
         }
         if(playerController.isDashing == true && !playerController.IsGrounded())
         {
-            ChangeAnimationState(PLAYER_DASH);
+            ChangeAnimationState(PLAYER_DOUBLE_JUMP);
             //showDash = false;
         }
         
