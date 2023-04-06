@@ -2041,16 +2041,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   jumpPower: 8
-  doubleJumpPower: 7
+  doubleJumpPower: 9
   maxFallSpeed: -13
   dashingPower: 200
   dashingTime: 0.2
-  dashingCooldown: 1
+  dashingCooldown: 0.4
   afterDashCooldown: 0.5
   dashPushPower: 10000
   coyoteTime: 0.1
-  coyoteTimeChecker: 0.1
-  coyoteTimeCheckerBool: 0
   jumpBufferTime: 0.1
   isFacingRight: 1
   isDashing: 0
