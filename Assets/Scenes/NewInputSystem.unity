@@ -404,6 +404,8 @@ GameObject:
   - component: {fileID: 216706997}
   - component: {fileID: 216706998}
   - component: {fileID: 216706999}
+  - component: {fileID: 216707000}
+  - component: {fileID: 216707001}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -566,6 +568,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 216707000}
+        m_TargetAssemblyTypeName: AnimationNewInputSystem, Assembly-CSharp
+        m_MethodName: moveAnimation
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 841e013c-8c13-4ee8-80bd-01d11e922688
     m_ActionName: Movement/Move[/Keyboard/a,/Keyboard/d,/Keyboard/leftArrow,/Keyboard/rightArrow]
   - m_PersistentCalls:
@@ -573,6 +587,18 @@ MonoBehaviour:
       - m_Target: {fileID: 216706998}
         m_TargetAssemblyTypeName: NewPlayerMovement, Assembly-CSharp
         m_MethodName: OnJump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 216707000}
+        m_TargetAssemblyTypeName: AnimationNewInputSystem, Assembly-CSharp
+        m_MethodName: jumpAnimation
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -627,7 +653,7 @@ MonoBehaviour:
   jumpingPower: 8
   doubleJumpingPower: 8
   maxFallSpeed: -13
-  dashingPower: 2
+  dashingPower: 5
   dashingTime: 0.2
   dashingCooldown: 0.4
   afterDashTime: 0.5
@@ -743,6 +769,41 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 0
+--- !u!114 &216707000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216706992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0618e83bf274e1409e55a6b41aa56ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  newPlayerMovement: {fileID: 216706998}
+  rb: {fileID: 216706995}
+--- !u!95 &216707001
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216706992}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bb210a2b83916d54aae93e5a0ca51a97, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &385788968
 GameObject:
   m_ObjectHideFlags: 0

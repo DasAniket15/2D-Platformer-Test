@@ -202,7 +202,7 @@ public class NewPlayerMovement : MonoBehaviour, PlayerControls.IMovementActions
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
         
-        rb.velocity = new Vector2(rb.velocity.x * dashingPower, 0f);
+        rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
         tr.emitting = true;
 
         yield return new WaitForSeconds(dashingTime);
@@ -220,7 +220,7 @@ public class NewPlayerMovement : MonoBehaviour, PlayerControls.IMovementActions
 
 
     // Checks if player is grounded or not
-    private bool IsGrounded()
+    public bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
