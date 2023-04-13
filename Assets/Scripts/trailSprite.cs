@@ -4,16 +4,11 @@ using UnityEngine;
 
 
 public class trailSprite : MonoBehaviour
-{
-    
+{    
     [SerializeField] private Material trailMaterial1;
     [SerializeField] private Material trailMaterial2;
     [SerializeField] private TrailRenderer trailRenderer;
     public PlayerController playerController;
-
-
-    
-
 
 
     void Update()

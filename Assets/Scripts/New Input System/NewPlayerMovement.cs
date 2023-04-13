@@ -10,7 +10,7 @@ public class NewPlayerMovement : MonoBehaviour, PlayerControls.IMovementActions
     public Rigidbody2D rb;
     public Transform groundCheck;
     public LayerMask groundLayer;
-    public TrailRenderer tr;
+    [SerializeField] private TrailRenderer tr;
 
     private PlayerControls playerControls;
 

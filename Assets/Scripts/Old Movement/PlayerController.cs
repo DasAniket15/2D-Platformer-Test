@@ -20,9 +20,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float coyoteTime;
     private float coyoteTimeCounter;
 
-    
-
-
     [SerializeField] private float jumpBufferTime;
     private float jumpBufferCounter;
 
