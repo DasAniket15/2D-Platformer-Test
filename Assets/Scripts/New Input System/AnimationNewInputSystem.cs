@@ -13,19 +13,12 @@ public class AnimationNewInputSystem : MonoBehaviour
     private float horizontal;
     private float vertical;
 
-
-
-
-
-
     // Animation States
-
     const string PLAYER_IDLE = "playerIdle";
     const string PLAYER_RUN = "playerRun";
     const string PLAYER_JUMP = "playerJump";
     const string PLAYER_DOUBLE_JUMP = "playerDoubleJump";
     const string PLAYER_DASH = "playerDash";
-
 
 
     // Start is called before the first frame update
@@ -34,11 +27,12 @@ public class AnimationNewInputSystem : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
+
     // Update is called once per frame
     void Update()
     {
         // Player idle animation
-        if (rb.velocity.x == 0 && rb.velocity.y==0 && newPlayerMovement.IsGrounded())
+        if (rb.velocity.x == 0 && rb.velocity.y == 0 && newPlayerMovement.IsGrounded())
         {
             ChangeAnimationState(PLAYER_IDLE);
         }
@@ -49,8 +43,9 @@ public class AnimationNewInputSystem : MonoBehaviour
             ChangeAnimationState(PLAYER_RUN);
         }
     }
+    
 
-        // Adds jump animation.
+    // Adds jump animation.
     public void jumpAnimation(InputAction.CallbackContext context)
     {
         if (context.performed && newPlayerMovement.IsGrounded())
@@ -64,6 +59,7 @@ public class AnimationNewInputSystem : MonoBehaviour
         }
     }
 
+
     public void dashAnimation(InputAction.CallbackContext context) 
     {
         if (context.performed) 
@@ -71,6 +67,7 @@ public class AnimationNewInputSystem : MonoBehaviour
             ChangeAnimationState(PLAYER_DOUBLE_JUMP);
         }
     }
+
 
     void ChangeAnimationState(string newState)
     {
