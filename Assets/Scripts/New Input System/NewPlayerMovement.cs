@@ -23,7 +23,7 @@ public class NewPlayerMovement : MonoBehaviour, PlayerControls.IMovementActions
     [SerializeField] private float maxFallSpeed;
 
     private bool canDash = true;
-    private bool isDashing;
+    public bool isDashing;
     private bool hasDashed;
     [SerializeField] private float dashingPower;
     [SerializeField] private float dashingTime;

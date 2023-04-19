@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEditor.Rendering.LookDev;
 
 public class AnimationNewInputSystem : MonoBehaviour
 {
@@ -11,7 +12,10 @@ public class AnimationNewInputSystem : MonoBehaviour
     private string currentAnimation;
 
     private float horizontal;
-    private float vertical;
+    private float afterJump = 0.6f;
+    private int counter = 0;
+    private bool hasLanded;
+    
 
     // Animation States
     const string PLAYER_IDLE = "playerIdle";
@@ -25,48 +29,81 @@ public class AnimationNewInputSystem : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        animator.Play(PLAYER_IDLE);
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        // Player idle animation
-        if (rb.velocity.x == 0 && rb.velocity.y == 0 && newPlayerMovement.IsGrounded())
+        if (newPlayerMovement.IsGrounded())
         {
-            ChangeAnimationState(PLAYER_IDLE);
+           if (hasLanded == true)
+            {
+                ChangeAnimationState(PLAYER_IDLE);
+                setFalse(hasLanded);
+                Debug.Log("Yes has landed");
+
+            }
         }
 
-        // Run animation is added when player gain velocity in x axis and not depended on input system.
-        if (rb.velocity.y == 0 && newPlayerMovement.IsGrounded() && rb.velocity.x != 0) 
-        {
-            ChangeAnimationState(PLAYER_RUN);
-        }
+
+
+
+    }
+
+    private void setFalse(bool hasLanded) 
+    {
+        this.hasLanded = false;
     }
     
 
     // Adds jump animation.
     public void jumpAnimation(InputAction.CallbackContext context)
     {
-        if (context.performed && newPlayerMovement.IsGrounded())
+        if (context.performed)
         {
-            ChangeAnimationState(PLAYER_JUMP);
+           ChangeAnimationState(PLAYER_JUMP);
+            if (!newPlayerMovement.IsGrounded()) 
+            {
+                ChangeAnimationState(PLAYER_DOUBLE_JUMP);
+            
+            }
+
+
         }
-        
-        if (context.performed && !newPlayerMovement.IsGrounded())
+        if (context.canceled)
         {
-           ChangeAnimationState(PLAYER_DOUBLE_JUMP);
+
+            hasLanded = true;
+            Debug.Log("Cancelled");
+           
+        }
+
+
+
+    }
+
+    public void runAnimation(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            ChangeAnimationState(PLAYER_RUN);
+        }
+        if (context.canceled) 
+        {
+            ChangeAnimationState(PLAYER_IDLE);
         }
     }
+
 
 
     public void dashAnimation(InputAction.CallbackContext context) 
     {
-        if (context.performed) 
-        {
-            ChangeAnimationState(PLAYER_DOUBLE_JUMP);
-        }
+        
     }
+
+  
 
 
     void ChangeAnimationState(string newState)
@@ -79,4 +116,7 @@ public class AnimationNewInputSystem : MonoBehaviour
         // reassign current state
         currentAnimation = newState;
     }
+
+  
+    
 }
