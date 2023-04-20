@@ -42,15 +42,12 @@ public class AnimationNewInputSystem : MonoBehaviour
             {
                 ChangeAnimationState(PLAYER_IDLE);
                 setFalse(hasLanded);
+                
                 Debug.Log("Yes has landed");
-
             }
         }
-
-
-
-
     }
+
 
     private void setFalse(bool hasLanded) 
     {
@@ -64,25 +61,21 @@ public class AnimationNewInputSystem : MonoBehaviour
         if (context.performed)
         {
            ChangeAnimationState(PLAYER_JUMP);
+            
             if (!newPlayerMovement.IsGrounded()) 
             {
                 ChangeAnimationState(PLAYER_DOUBLE_JUMP);
-            
             }
-
-
         }
+
         if (context.canceled)
         {
-
             hasLanded = true;
+            
             Debug.Log("Cancelled");
-           
         }
-
-
-
     }
+
 
     public void runAnimation(InputAction.CallbackContext context)
     {
@@ -90,6 +83,7 @@ public class AnimationNewInputSystem : MonoBehaviour
         {
             ChangeAnimationState(PLAYER_RUN);
         }
+
         if (context.canceled) 
         {
             ChangeAnimationState(PLAYER_IDLE);
@@ -97,13 +91,10 @@ public class AnimationNewInputSystem : MonoBehaviour
     }
 
 
-
     public void dashAnimation(InputAction.CallbackContext context) 
     {
         
     }
-
-  
 
 
     void ChangeAnimationState(string newState)
@@ -116,7 +107,4 @@ public class AnimationNewInputSystem : MonoBehaviour
         // reassign current state
         currentAnimation = newState;
     }
-
-  
-    
 }
