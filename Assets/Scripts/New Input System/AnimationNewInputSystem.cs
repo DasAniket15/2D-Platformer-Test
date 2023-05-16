@@ -15,6 +15,7 @@ public class AnimationNewInputSystem : MonoBehaviour
     private float afterJump = 0.6f;
     private int counter = 0;
     private bool hasLanded;
+    private bool isRunning;
     
 
     // Animation States
@@ -45,6 +46,49 @@ public class AnimationNewInputSystem : MonoBehaviour
                 
                 Debug.Log("Yes has landed");
             }
+
+            if (rb.velocity.x != 0) 
+            {
+                ChangeAnimationState(PLAYER_RUN);
+            }
+
+            if (rb.velocity.x == 0)
+            {
+                ChangeAnimationState(PLAYER_IDLE);
+            }
+
+            
+
+
+
+        }
+        if (!newPlayerMovement.IsGrounded()){
+        if (rb.velocity.y != 0 && rb.velocity.y >= -10f)
+        {
+            ChangeAnimationState(PLAYER_JUMP);
+        }
+            if (rb.velocity.y < -10f)
+            {
+                ChangeAnimationState(PLAYER_DOUBLE_JUMP);
+            }
+        }
+
+
+
+
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            
+            
+                // Handle collision with wall
+                ChangeAnimationState(PLAYER_IDLE);
+
+                Debug.Log("collided");
+            
         }
     }
 
@@ -58,20 +102,22 @@ public class AnimationNewInputSystem : MonoBehaviour
     // Adds jump animation.
     public void jumpAnimation(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed )
         {
-           ChangeAnimationState(PLAYER_JUMP);
             
+
             if (!newPlayerMovement.IsGrounded()) 
             {
                 ChangeAnimationState(PLAYER_DOUBLE_JUMP);
             }
         }
 
-        if (context.canceled)
+        if (context.canceled && newPlayerMovement.IsGrounded())
         {
             hasLanded = true;
-            
+
+            ChangeAnimationState(PLAYER_IDLE);
+
             Debug.Log("Cancelled");
         }
     }
@@ -79,21 +125,15 @@ public class AnimationNewInputSystem : MonoBehaviour
 
     public void runAnimation(InputAction.CallbackContext context)
     {
-        if (context.performed)
-        {
-            ChangeAnimationState(PLAYER_RUN);
-        }
 
-        if (context.canceled) 
-        {
-            ChangeAnimationState(PLAYER_IDLE);
-        }
+      
     }
 
 
     public void dashAnimation(InputAction.CallbackContext context) 
     {
         
+
     }
 
 
