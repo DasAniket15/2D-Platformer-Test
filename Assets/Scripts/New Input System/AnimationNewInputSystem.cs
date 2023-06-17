@@ -56,56 +56,42 @@ public class AnimationNewInputSystem : MonoBehaviour
             {
                 ChangeAnimationState(PLAYER_IDLE);
             }
-
-            
-
-
-
         }
+
         if (!newPlayerMovement.IsGrounded()){
-        if (rb.velocity.y != 0 && rb.velocity.y >= -10f)
-        {
-            ChangeAnimationState(PLAYER_JUMP);
-        }
+            if (rb.velocity.y != 0 && rb.velocity.y >= -10f)
+            {
+                ChangeAnimationState(PLAYER_JUMP);
+            }
+
             if (rb.velocity.y < -10f)
             {
                 ChangeAnimationState(PLAYER_DOUBLE_JUMP);
             }
         }
-
-
-
-
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Wall"))
         {
-            
-            
                 // Handle collision with wall
                 ChangeAnimationState(PLAYER_IDLE);
 
                 Debug.Log("collided");
-            
         }
     }
-
 
     private void setFalse(bool hasLanded) 
     {
         this.hasLanded = false;
     }
-    
 
     // Adds jump animation.
     public void jumpAnimation(InputAction.CallbackContext context)
     {
         if (context.performed )
         {
-            
-
             if (!newPlayerMovement.IsGrounded()) 
             {
                 ChangeAnimationState(PLAYER_DOUBLE_JUMP);
@@ -122,24 +108,20 @@ public class AnimationNewInputSystem : MonoBehaviour
         }
     }
 
-
     public void runAnimation(InputAction.CallbackContext context)
     {
 
-      
     }
 
 
     public void dashAnimation(InputAction.CallbackContext context) 
     {
         
-
     }
-
 
     void ChangeAnimationState(string newState)
     {
-        // stops interuption between animations
+        // stops interruption between animations
         if (currentAnimation == newState) return;
 
         animator.Play(newState);
